@@ -3,6 +3,7 @@ from .models import Task
 from .serializers import TaskSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.filters import OrderingFilter
+from django.utils import timezone
 
 
 class TaskListCreateView(generics.ListCreateAPIView):
@@ -42,3 +43,23 @@ class TaskDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)
+
+
+class OverdueTaskListView(generics.ListAPIView):
+    serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return (
+            Task.objects.filter(
+                user=self.request.user,
+                due_date__lt=timezone.now(),
+            )
+            .exclude(
+                status__in=[
+                    Task.Status.COMPLETED,
+                    Task.Status.CANCELLED,
+                ]
+            )
+            .order_by("due_date")
+        )

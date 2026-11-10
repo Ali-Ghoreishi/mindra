@@ -18,3 +18,8 @@ select = [
     "F",
     "I",
 ]
+
+[project]
+name = "mindra"
+version = "0.1.0"
+description = "AI Personal Assistant"
