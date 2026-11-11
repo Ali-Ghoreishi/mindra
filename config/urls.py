@@ -35,4 +35,6 @@ urlpatterns = [
     path("api/tasks/", include("apps.tasks.urls")),
     # Reminders
     path("api/reminders/", include("apps.reminders.urls")),
+    # Reports
+    path("api/reports/", include("apps.reports.urls")),
 ]

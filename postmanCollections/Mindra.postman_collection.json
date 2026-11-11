@@ -1,0 +1,576 @@
+{
+  "info": {
+    "_postman_id": "b5bfe968-afd0-4b0c-9b90-b9033547caad",
+    "name": "Mindra",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "20478011"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"your_username\",\r\n    \"password\": \"your_password\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}api/auth/token/",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "auth",
+                "token",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"ali\",\r\n    \"email\": \"ali@example.com\",\r\n    \"password\": \"12341234\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}api/auth/register/",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "auth",
+                "register",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Me",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}api/users/me/",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "users",
+                "me",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"first_name\": \"Ali\",\r\n    \"last_name\": \"Ahmadi\",\r\n    \"email\": \"ali@example.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}api/users/me/",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "users",
+                "me",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"old_password\": \"OldPassword123\",\r\n    \"new_password\": \"NewPassword123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}api/users/change-password/",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "users",
+                "change-password",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc5NDkwMTY1MCwiaWF0IjoxNzk0Mjk2ODUwLCJqdGkiOiI0MTA5YzEyMmIzY2E0MmZjODhiMzU4YzdhYTIwY2I0ZiIsInVzZXJfaWQiOiIxIn0.nqDFKqHqMfO8xnlLaQB_iX4uMb04ELzDMG-HuL7bZpU\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}api/auth/token/refresh/",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "auth",
+                "token",
+                "refresh",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"refresh\": \"{{json_web_token_0g3l}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}api/users/logout/",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "users",
+                "logout",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Tasks",
+      "item": [
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Learn Django REST Framework\",\r\n    \"description\": \"Build Mindra API\",\r\n    \"priority\": \"high\",\r\n    \"status\": \"pending\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}api/tasks/",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "tasks",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}api/tasks/?page=1&ordering=created_at&status=completed&priority=high",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "tasks",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "ordering",
+                  "value": "created_at",
+                  "description": "created_at, -created_at, due_date"
+                },
+                {
+                  "key": "status",
+                  "value": "completed"
+                },
+                {
+                  "key": "priority",
+                  "value": "high"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "View",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}api/tasks/{{uuid}}/",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "tasks",
+                "{{uuid}}",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Prioritized",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}api/tasks/prioritized/",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "tasks",
+                "prioritized",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Overdue",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}api/tasks/overdue/",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "tasks",
+                "overdue",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Reminders",
+      "item": [
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"task\": \"YOUR_TASK_UUID\",\r\n    \"remind_at\": \"2026-11-11T09:00:00+03:30\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}api/reminders/",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "reminders",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}api/reminders/",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "reminders",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "ordering",
+                  "value": "created_at",
+                  "description": "created_at, -created_at, due_date",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "View",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}api/reminders/{{uuid}}/",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "reminders",
+                "{{uuid}}",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Put",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"task\": \"\",\r\n    \"remind_at\": \"2026-11-14T09:00:00+03:30\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}api/reminders/{{uuid}}/",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "reminders",
+                "{{uuid}}",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Patch",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"remind_at\": \"2026-11-14T09:00:00+03:30\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}api/reminders/{{uuid}}/",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "reminders",
+                "{{uuid}}",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}api/reminders/{{uuid}}/",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "reminders",
+                "{{uuid}}",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Reports",
+      "item": [
+        {
+          "name": "Daily",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}api/reports/daily/",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "reports",
+                "daily",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Weekly",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}api/reports/weekly/",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "reports",
+                "weekly",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{accessToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": ""
+    },
+    {
+      "key": "accessToken",
+      "value": ""
+    },
+    {
+      "key": "refreshToken",
+      "value": ""
+    },
+    {
+      "key": "username",
+      "value": ""
+    },
+    {
+      "key": "password",
+      "value": ""
+    },
+    {
+      "key": "uuid",
+      "value": ""
+    }
+  ]
+}

@@ -4,6 +4,8 @@ from .serializers import TaskSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.filters import OrderingFilter
 from django.utils import timezone
+from django.db.models import Case, When, Value, IntegerField
+from .services import get_prioritized_tasks
 
 
 class TaskListCreateView(generics.ListCreateAPIView):
@@ -63,3 +65,10 @@ class OverdueTaskListView(generics.ListAPIView):
             )
             .order_by("due_date")
         )
+
+class PrioritizedTaskListView(generics.ListAPIView):
+    serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return get_prioritized_tasks(self.request.user) 

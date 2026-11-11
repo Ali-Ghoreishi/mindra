@@ -1,3 +1,27 @@
-from django.shortcuts import render
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
-# Create your views here.
+from .services import get_daily_report, get_weekly_report
+from .serializers import DailyReportSerializer, WeeklyReportSerializer
+
+
+class DailyReportView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        report = get_daily_report(request.user)
+
+        serializer = DailyReportSerializer(report)
+
+        return Response(serializer.data)
+
+
+class WeeklyReportView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        report = get_weekly_report(request.user)
+        serializer = WeeklyReportSerializer(report)
+
+        return Response(serializer.data)
