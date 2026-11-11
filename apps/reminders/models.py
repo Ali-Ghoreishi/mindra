@@ -4,17 +4,10 @@ from django.db import models
 
 
 class Reminder(models.Model):
-
-    id = models.UUIDField(
-        primary_key=True,
-        default=uuid.uuid4,
-        editable=False
-    )
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     task = models.ForeignKey(
-        "tasks.Task",
-        on_delete=models.CASCADE,
-        related_name="reminders"
+        "tasks.Task", on_delete=models.CASCADE, related_name="reminders"
     )
 
     remind_at = models.DateTimeField()

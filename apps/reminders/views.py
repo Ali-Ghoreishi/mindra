@@ -10,15 +10,16 @@ class ReminderListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Reminder.objects.filter(
-            task__user=self.request.user
-        ).select_related("task")
+        return Reminder.objects.filter(task__user=self.request.user).select_related(
+            "task"
+        )
+
 
 class ReminderDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ReminderSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Reminder.objects.filter(
-            task__user=self.request.user
-        ).select_related("task")    
+        return Reminder.objects.filter(task__user=self.request.user).select_related(
+            "task"
+        )

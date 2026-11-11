@@ -1,9 +1,14 @@
 from rest_framework import generics, status
-from rest_framework.permissions import AllowAny
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import RegisterSerializer, ProfileSerializer, ChangePasswordSerializer, LogoutSerializer
+
+from .serializers import (
+    ChangePasswordSerializer,
+    LogoutSerializer,
+    ProfileSerializer,
+    RegisterSerializer,
+)
 
 
 class RegisterView(generics.CreateAPIView):

@@ -16,8 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, include
-
+from django.urls import include, path
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -37,4 +36,6 @@ urlpatterns = [
     path("api/reminders/", include("apps.reminders.urls")),
     # Reports
     path("api/reports/", include("apps.reports.urls")),
+    # Assistant
+    path("api/assistant/", include("apps.assistant.urls")),
 ]
