@@ -535,6 +535,38 @@
           "response": []
         }
       ]
+    },
+    {
+      "name": "Assistants",
+      "item": [
+        {
+          "name": "Assistant",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"message\": \"وظایف عقب‌افتاده من را نشان بده\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}api/assistant/",
+              "host": [
+                "{{baseUrl}}api"
+              ],
+              "path": [
+                "assistant",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     }
   ],
   "auth": {

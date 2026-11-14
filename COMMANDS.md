@@ -22,6 +22,12 @@ python -m ruff check . --select I --fix
 
 ## 2. Django
 
+venv
+
+```bash
+.\.venv\Scripts\Activate.ps1
+```
+
 Run development server:
 
 ```bash
