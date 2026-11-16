@@ -1,0 +1,16 @@
+{
+    "common": {
+        "success": "Operation completed successfully.",
+        "error": "An error occurred while processing the operation."
+    },
+    "task": {
+        "created": "Task \"{title}\" was created successfully.",
+        "updated": "Task \"{title}\" was updated successfully.",
+        "deleted": "Task deleted successfully.",
+        "not_found": "The requested task was not found.",
+        "not_found_by_id": "No task found with ID {task_id}."
+    },
+    "auth": {
+        "invalid_credentials": "Invalid username or password."
+    }
+}

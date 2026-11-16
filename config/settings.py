@@ -164,3 +164,6 @@ SIMPLE_JWT = {
 }
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+
+DEFAULT_LANGUAGE = "fa"
+SUPPORTED_LANGUAGES = ["fa", "en"]
