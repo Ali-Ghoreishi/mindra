@@ -35,3 +35,11 @@ def translate(key, language=None, **kwargs):
         raise ValueError(f"Invalid translation value: {key}")
 
     return value.format(**kwargs)
+
+
+def request_language(request):
+    supported = set(settings.SUPPORTED_LANGUAGES)
+    requested = request.query_params.get("language") if request else None
+    if not requested and request:
+        requested = request.headers.get("Accept-Language", "").split(",", 1)[0].split("-", 1)[0]
+    return requested if requested in supported else None

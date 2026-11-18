@@ -14,7 +14,8 @@ class ReminderSerializer(serializers.ModelSerializer):
 
         if value.user != user:
             raise serializers.ValidationError(
-                "You do not have permission to create a reminder for this task."
+                "You do not have permission to create a reminder for this task.",
+                code="task.foreign_task",
             )
 
         return value

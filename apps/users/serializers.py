@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 
+from config.utils.translation import request_language, translate
+
 User = get_user_model()
 
 
@@ -31,7 +33,10 @@ class ChangePasswordSerializer(serializers.Serializer):
         user = self.context["request"].user
 
         if not user.check_password(value):
-            raise serializers.ValidationError("Current password is incorrect.")
+            raise serializers.ValidationError(
+                "Invalid current password.",
+                code="auth.invalid_current_password",
+            )
 
         return value
 

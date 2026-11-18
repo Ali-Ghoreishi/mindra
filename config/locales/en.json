@@ -8,9 +8,33 @@
         "updated": "Task \"{title}\" was updated successfully.",
         "deleted": "Task deleted successfully.",
         "not_found": "The requested task was not found.",
-        "not_found_by_id": "No task found with ID {task_id}."
+        "not_found_by_id": "No task found with ID {task_id}.",
+        "foreign_task": "This task does not belong to you."
     },
     "auth": {
-        "invalid_credentials": "Invalid username or password."
+        "invalid_credentials": "Invalid username or password.",
+        "invalid_current_password": "The current password is incorrect."
+    },
+    "profile": {
+        "email_exists": "This email is already registered to another user."
+    },
+    "errors": {
+        "request_failed": "The request is invalid.",
+        "foreign_task": "You do not have permission to create a reminder for this task.",
+        "required": "This field is required.",
+        "blank": "This field may not be blank.",
+        "invalid": "The submitted value is invalid.",
+        "unique": "This value has already been registered.",
+        "not_found": "The requested item was not found.",
+        "not_authenticated": "Authentication credentials were not provided.",
+        "authentication_failed": "The authentication credentials are invalid.",
+        "permission_denied": "You do not have permission to perform this request.",
+        "method_not_allowed": "This method is not allowed for this request.",
+        "parse_error": "The submitted data could not be parsed.",
+        "throttled": "Too many requests. Please try again later.",
+        "max_length": "This value is longer than allowed.",
+        "min_length": "This value is shorter than allowed.",
+        "max_value": "This value is above the allowed maximum.",
+        "min_value": "This value is below the allowed minimum."
     }
 }
