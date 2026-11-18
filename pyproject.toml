@@ -23,5 +23,5 @@ ignore = ["F401"]
 
 [project]
 name = "mindra"
-version = "0.1.4"
+version = "0.1.5"
 description = "AI Personal Assistant"
