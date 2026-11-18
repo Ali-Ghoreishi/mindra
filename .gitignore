@@ -32,3 +32,6 @@ htmlcov/
 
 # Ruff
 .ruff_cache/
+
+# Other
+roadmap.txt
