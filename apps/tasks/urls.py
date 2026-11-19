@@ -5,6 +5,7 @@ from .views import (
     PrioritizedTaskListView,
     TaskDetailView,
     TaskListCreateView,
+    TaskWithRemindersCreateView,
 )
 
 urlpatterns = [
@@ -12,4 +13,9 @@ urlpatterns = [
     path("prioritized/", PrioritizedTaskListView.as_view(), name="task-prioritized"),
     path("<uuid:pk>/", TaskDetailView.as_view(), name="task-detail"),
     path("overdue/", OverdueTaskListView.as_view(), name="task-overdue"),
+    path(
+        "with-reminders/",
+        TaskWithRemindersCreateView.as_view(),
+        name="task-with-reminders",
+    ),
 ]

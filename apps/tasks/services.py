@@ -1,5 +1,8 @@
+from django.db import transaction
 from django.db.models import Case, IntegerField, Value, When
 from django.utils import timezone
+
+from apps.reminders.models import Reminder
 
 from .models import Task
 
@@ -27,3 +30,15 @@ def get_overdue_tasks(user):
         .exclude(status__in=[Task.Status.COMPLETED, Task.Status.CANCELLED])
         .order_by("due_date")
     )
+
+
+def create_task_with_reminders(validated_data, user):
+    reminders = validated_data.pop("reminders")
+
+    with transaction.atomic():
+        task = Task.objects.create(user=user, **validated_data)
+
+        for remind_at in reminders:
+            Reminder.objects.create(task=task, remind_at=remind_at)
+
+    return task

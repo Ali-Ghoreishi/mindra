@@ -1,17 +1,19 @@
-from django.utils import timezone
-from rest_framework import generics
-from rest_framework.filters import OrderingFilter
-from rest_framework.permissions import IsAuthenticated
 import logging
 
+from django.utils import timezone
+from rest_framework import generics, status
+from rest_framework.filters import OrderingFilter
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+
+from apps.reminders.serializers import ReminderSerializer
 from config.utils.translation import translate
 
 from .models import Task
-from .serializers import TaskSerializer
-from .services import get_prioritized_tasks
+from .serializers import TaskSerializer, TaskWithRemindersSerializer
+from .services import create_task_with_reminders, get_prioritized_tasks
 
 logger = logging.getLogger(__name__)
-
 
 
 # Handles listing tasks (GET) and creating a new task (POST).
@@ -136,3 +138,29 @@ class PrioritizedTaskListView(generics.ListAPIView):
 
     def get_queryset(self):
         return get_prioritized_tasks(self.request.user)
+
+
+# Handles creating tasks with reminders (POST).
+class TaskWithRemindersCreateView(generics.CreateAPIView):
+    serializer_class = TaskWithRemindersSerializer
+    permission_classes = [IsAuthenticated]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        task = create_task_with_reminders(serializer.validated_data, request.user)
+
+        return Response(
+            {
+                "message": translate("task.created_with_reminders", title=task.title),
+                # Serialize task and reminders to expose only the defined fields in the API response.
+                "data": {
+                    "task": TaskSerializer(task).data,
+                    "reminders": ReminderSerializer(
+                        task.reminders.all(), many=True
+                    ).data,
+                },
+            },
+            status=status.HTTP_201_CREATED,
+        )
