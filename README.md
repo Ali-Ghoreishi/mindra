@@ -104,6 +104,67 @@ The API will be available at:
 http://localhost:8000/
 ```
 
+### Celery & Redis Setup
+
+Mindra uses **Celery** for background task processing and **Redis (Memurai on Windows)** as the message broker. Celery Beat handles periodic task scheduling.
+
+### 1. Install Dependencies
+
+```bash
+pip install celery redis
+```
+
+### 2. Start Redis
+
+On Windows, install and start [Memurai Developer](https://www.memurai.com/get-memurai).
+
+Verify the connection:
+
+```bash
+memurai-cli ping
+```
+
+Expected output:
+
+```text
+PONG
+```
+
+### 3. Configure Environment
+
+In `config/settings.py`:
+
+```python
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_TIMEZONE = "Asia/Tehran"
+CELERY_ENABLE_UTC = True
+```
+
+### 4. Run Celery Worker
+
+Open a terminal and execute:
+
+```bash
+celery -A config worker -l info --pool=solo
+```
+
+### 5. Run Celery Beat
+
+Open another terminal and execute:
+
+```bash
+celery -A config beat -l info
+```
+
+### Notes
+
+- Redis, Celery Worker, and Celery Beat must be running for scheduled tasks to execute.
+- Django's `runserver` is not required for background tasks.
+- On Windows, use `--pool=solo` for the Celery Worker.
+- Keep Worker and Beat running in separate terminals.
+- Celery Beat is responsible for scheduling tasks; Celery Worker executes them.
+
+
 ## Environment Variables
 
 See `.env.example` for the required environment variables.

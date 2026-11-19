@@ -33,5 +33,10 @@ htmlcov/
 # Ruff
 .ruff_cache/
 
+# Celery Beat
+celerybeat-schedule
+celerybeat-schedule-shm
+celerybeat-schedule-wal
+
 # Other
 roadmap.txt

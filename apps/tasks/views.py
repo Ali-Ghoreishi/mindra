@@ -2,12 +2,16 @@ from django.utils import timezone
 from rest_framework import generics
 from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import IsAuthenticated
+import logging
 
 from config.utils.translation import translate
 
 from .models import Task
 from .serializers import TaskSerializer
 from .services import get_prioritized_tasks
+
+logger = logging.getLogger(__name__)
+
 
 
 # Handles listing tasks (GET) and creating a new task (POST).
@@ -53,6 +57,7 @@ class TaskListCreateView(generics.ListCreateAPIView):
         if priority:
             queryset = queryset.filter(priority=priority)
 
+        logger.info("Fetching tasks for user: %s", self.request.user)
         return queryset
 
     def list(self, request, *args, **kwargs):

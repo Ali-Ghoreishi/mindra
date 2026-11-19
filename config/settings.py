@@ -19,6 +19,8 @@ load_dotenv()
 
 from datetime import timedelta
 
+from celery.schedules import crontab
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -168,3 +170,64 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 DEFAULT_LANGUAGE = "fa"
 SUPPORTED_LANGUAGES = ["fa", "en"]
+
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_TIMEZONE = "Asia/Tehran"
+CELERY_ENABLE_UTC = True
+
+CELERY_BEAT_SCHEDULE = {
+    "test-cron-job": {
+        "task": "apps.reports.tasks.test_cron_job",
+        "schedule": crontab(minute="*"),
+    },
+    "remove-old-tasks": {
+        "task": "apps.tasks.tasks.remove_old_tasks",
+        "schedule": crontab(minute="*"),
+    },
+}
+
+# Logging
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+
+    "formatters": {
+        "standard": {
+            "format": "{asctime} | {levelname} | {name} | {message}",
+            "style": "{",
+        },
+    },
+
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "standard",
+        },
+        "file": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": BASE_DIR / "logs" / "mindra.log",
+            "maxBytes": 5 * 1024 * 1024,
+            "backupCount": 5,
+            "encoding": "utf-8",
+            "formatter": "standard",
+        },
+    },
+
+    "loggers": {
+        "apps": {
+            "handlers": ["console", "file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "celery": {
+            "handlers": ["console", "file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+
+    "root": {
+        "handlers": ["console", "file"],
+        "level": "INFO",
+    },
+}
