@@ -184,20 +184,24 @@ CELERY_BEAT_SCHEDULE = {
         "task": "apps.tasks.tasks.remove_old_tasks",
         "schedule": crontab(minute="*"),
     },
+    "dispatch-due-reminders": {
+        "task": "apps.reminders.tasks.dispatch_due_reminders",
+        "schedule": crontab(minute="*"),
+    },
 }
+
+REDIS_LOCK_URL = "redis://localhost:6379/2"
 
 # Logging
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-
     "formatters": {
         "standard": {
             "format": "{asctime} | {levelname} | {name} | {message}",
             "style": "{",
         },
     },
-
     "handlers": {
         "console": {
             "class": "logging.StreamHandler",
@@ -212,7 +216,6 @@ LOGGING = {
             "formatter": "standard",
         },
     },
-
     "loggers": {
         "apps": {
             "handlers": ["console", "file"],
@@ -225,9 +228,13 @@ LOGGING = {
             "propagate": False,
         },
     },
-
     "root": {
         "handlers": ["console", "file"],
         "level": "INFO",
     },
 }
+
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+
+# TODO: Store each user's Telegram chat ID in the database and use it instead of this value.
+TELEGRAM_CHAT_ID = 5656033791
